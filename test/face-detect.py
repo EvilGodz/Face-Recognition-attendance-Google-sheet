@@ -1,0 +1,19 @@
+import cv2 as cv
+
+img = cv.imread('6.jpg')
+face_model = cv.CascadeClassifier('face-detect-model.xml')
+gray_scale = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+faces = face_model.detectMultiScale(
+        gray_scale,
+        scaleFactor=1.05,
+        minNeighbors=4,
+        minSize=(50, 50),
+        flags = cv.CASCADE_SCALE_IMAGE)
+
+for (x,y,w,h) in faces:
+    cv.rectangle(img,(x,y),(x+w,y+h),(0,255,0),2)
+
+
+cv.imshow('windowsimage',img)
+cv.waitKey(0)
+cv.destroyAllWindows()
